@@ -11,6 +11,8 @@ This project adheres to [Semantic Versioning](https://semver.org/).
   (#[1662](https://github.com/nix-rust/nix/pull/1662))
 - Added `CanRaw` to `SockProtocol` and `CanBcm` as a separate `SocProtocol` constant.
   ([#1912](https://github.com/nix-rust/nix/pull/1912))
+- Added `pidfd_getfd` on Linux.
+  ([#1868](https://github.com/nix-rust/nix/pull/1868))
 
 ### Changed
 
