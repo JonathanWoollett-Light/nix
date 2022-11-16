@@ -227,6 +227,6 @@ feature! {
     pub mod timer;
 }
 
-#[cfg(target_os = "linux")]
+#[cfg(all(target_os = "linux", feature = "process"))]
 /// pidfd related functionality
 pub mod pidfd;
