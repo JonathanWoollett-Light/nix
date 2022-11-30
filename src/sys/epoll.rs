@@ -108,7 +108,19 @@ impl Epoll {
     /// [`epoll_create1`](https://man7.org/linux/man-pages/man2/epoll_create1.2.html).
     pub fn new(flags: EpollCreateFlags) -> Result<Self> {
         let res = unsafe { libc::epoll_create1(flags.bits()) };
+        
         let fd = Errno::result(res)?;
+
+        let owned_fd = unsafe { OwnedFd::from_raw_fd(fd) };
+        Ok(Self(owned_fd))
+    }
+    pub fn new_test(flags: EpollCreateFlags) -> std::result::Result<Self,i32> {
+        let res = unsafe { libc::epoll_create1(flags.bits()) };
+        
+        let fd = if res == -1 {
+            Err(unsafe { *libc::__errno_location() })
+        } else { Ok(res) }?;
+
         let owned_fd = unsafe { OwnedFd::from_raw_fd(fd) };
         Ok(Self(owned_fd))
     }

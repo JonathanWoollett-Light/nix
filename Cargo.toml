@@ -85,6 +85,7 @@ parking_lot = "0.12"
 rand = "0.8"
 tempfile = "3.3.0"
 semver = "1.0.7"
+iai = "0.1"
 
 [target.'cfg(any(target_os = "android", target_os = "linux"))'.dev-dependencies]
 caps = "0.5.3"
@@ -112,3 +113,7 @@ harness = false
 [[test]]
 name = "test-ptymaster-drop"
 path = "test/test_ptymaster_drop.rs"
+
+[[bench]]
+name = "my_benchmark"
+harness = false
