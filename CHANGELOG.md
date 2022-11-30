@@ -60,6 +60,8 @@ This project adheres to [Semantic Versioning](https://semver.org/).
 
 ### Changed
 
+- The epoll interface now uses a type.
+  ([#1882](https://github.com/nix-rust/nix/pull/1882))
 - The MSRV is now 1.63.0
   ([#1882](https://github.com/nix-rust/nix/pull/1882))
 - The `addr` argument of `sys::mman::mmap` is now of type `Option<NonZeroUsize>`.
