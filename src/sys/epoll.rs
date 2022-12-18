@@ -71,7 +71,7 @@ impl EpollEvent {
 
 /// A safe wrapper around [`epoll`](https://man7.org/linux/man-pages/man7/epoll.7.html).
 /// ```
-/// # use nix::sys::{epoll::{Epoll, EpollEvent, EpollFlags, EpollCreateFlags}, eventfd::{eventfd, EfdFlags}};
+/// # use nix::sys::{epoll::{Epoll, EpollEvent, EpollFlags, EpollCreateFlags}, eventfd::{EventFd, EfdFlags}};
 /// # use nix::unistd::write;
 /// # use std::os::unix::io::{OwnedFd, FromRawFd, AsRawFd, AsFd};
 /// # use std::time::{Instant, Duration};
@@ -83,11 +83,11 @@ impl EpollEvent {
 /// let epoll = Epoll::new(EpollCreateFlags::empty())?;
 ///
 /// // Create eventfd & Add event
-/// let eventfd = eventfd(0, EfdFlags::empty())?;
+/// let eventfd = EventFd::new()?;
 /// epoll.add(&eventfd, EpollEvent::new(EpollFlags::EPOLLIN,DATA))?;
 ///
 /// // Arm eventfd & Time wait
-/// write(eventfd.as_raw_fd(), &1u64.to_ne_bytes())?;
+/// eventfd.arm()?;
 /// let now = Instant::now();
 ///
 /// // Wait on event
