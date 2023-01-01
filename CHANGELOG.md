@@ -5,6 +5,9 @@ This project adheres to [Semantic Versioning](https://semver.org/).
 
 ## [Unreleased] - ReleaseDate
 ### Added
+
+- Added futex interface.
+  ([#1907](https://github.com/nix-rust/nix/pull/1907))
 - Add `PF_ROUTE` to `SockType` on macOS, iOS, all of the BSDs, Fuchsia, Haiku, Illumos.
   ([#1867](https://github.com/nix-rust/nix/pull/1867))
 - Added `nix::ucontext` module on `aarch64-unknown-linux-gnu`.
