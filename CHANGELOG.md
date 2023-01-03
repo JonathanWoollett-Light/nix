@@ -18,6 +18,12 @@ This project adheres to [Semantic Versioning](https://semver.org/).
   ([#1912](https://github.com/nix-rust/nix/pull/1912))
   - Added `EventFd` type.
   ([#1945](https://github.com/nix-rust/nix/pull/1945))
+- Added `pidfd_getfd` on Linux.
+  ([#1868](https://github.com/nix-rust/nix/pull/1868))
+- Added `pid_open` on Linux.
+  ([#1868](https://github.com/nix-rust/nix/pull/1868))
+- Added `pidfd_send_signal` on Linux.
+  ([#1868](https://github.com/nix-rust/nix/pull/1868))
 
 ### Changed
 
