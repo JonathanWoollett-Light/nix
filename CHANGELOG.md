@@ -15,6 +15,8 @@ This project adheres to [Semantic Versioning](https://semver.org/).
   ([#1868](https://github.com/nix-rust/nix/pull/1868))
 - Added `pid_open` on Linux.
   ([#1868](https://github.com/nix-rust/nix/pull/1868))
+- Added `pidfd_send_signal` on Linux.
+  ([#1868](https://github.com/nix-rust/nix/pull/1868))
 
 ### Changed
 
