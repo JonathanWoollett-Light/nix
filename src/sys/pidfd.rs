@@ -109,6 +109,7 @@ pub fn pidfd_send_signal<Fd: AsRawFd>(
             pid.as_raw_fd(),
             sig as i32,
             info,
+            0u32,
         )
     } {
         -1 => Err(Errno::last()),

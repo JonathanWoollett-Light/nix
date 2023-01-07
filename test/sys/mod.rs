@@ -58,3 +58,6 @@ mod test_pthread;
 mod test_ptrace;
 #[cfg(any(target_os = "android", target_os = "linux"))]
 mod test_timerfd;
+
+#[cfg(all(target_os = "linux", feature = "signal", feature = "process"))]
+pub mod test_pidfd;
