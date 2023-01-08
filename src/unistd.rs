@@ -34,7 +34,6 @@ use std::ffi::{CString, OsStr};
 #[cfg(not(target_os = "redox"))]
 use std::os::unix::ffi::OsStrExt;
 use std::os::unix::ffi::OsStringExt;
-use std::os::unix::io::AsFd;
 use std::os::unix::io::RawFd;
 use std::os::unix::io::{AsFd, AsRawFd};
 use std::path::PathBuf;
