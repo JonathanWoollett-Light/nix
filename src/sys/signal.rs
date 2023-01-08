@@ -585,6 +585,22 @@ impl SigSet {
     }
 }
 
+impl From<Signal> for SigSet {
+    fn from(signal: Signal) -> SigSet {
+        let mut sigset = SigSet::empty();
+        sigset.add(signal);
+        sigset
+    }
+}
+
+impl std::ops::BitOr for SigSet {
+    type Output = Self;
+
+    fn bitor(self, rhs: Self) -> Self::Output {
+        self.iter().chain(rhs.iter()).collect()
+    }
+}
+
 impl AsRef<libc::sigset_t> for SigSet {
     fn as_ref(&self) -> &libc::sigset_t {
         &self.sigset
