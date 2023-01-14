@@ -24,6 +24,8 @@ This project adheres to [Semantic Versioning](https://semver.org/).
   ([#1868](https://github.com/nix-rust/nix/pull/1868))
 - Added `pidfd_send_signal` on Linux.
   ([#1868](https://github.com/nix-rust/nix/pull/1868))
+- Added `mq_timedreceive` to `::nix::mqueue`.
+  ([#1966])(https://github.com/nix-rust/nix/pull/1966)
 
 ### Changed
 
@@ -36,6 +38,9 @@ This project adheres to [Semantic Versioning](https://semver.org/).
   ([#1921](https://github.com/nix-rust/nix/pull/1921))
 
 ### Fixed
+- Fix `SockaddrIn6` bug that was swapping flowinfo and scope_id byte ordering.
+  ([#1964](https://github.com/nix-rust/nix/pull/1964))
+
 ### Removed
 
 - Removed deprecated IoVec API.
