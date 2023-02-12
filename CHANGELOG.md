@@ -10,6 +10,8 @@ This project adheres to [Semantic Versioning](https://semver.org/).
 
 - Added futex interface.
   ([#1907](https://github.com/nix-rust/nix/pull/1907))
+- Added `AT_EACCESS` to `AtFlags` on all platforms but android
+  ([#1995](https://github.com/nix-rust/nix/pull/1995))
 - Add `PF_ROUTE` to `SockType` on macOS, iOS, all of the BSDs, Fuchsia, Haiku, Illumos.
   ([#1867](https://github.com/nix-rust/nix/pull/1867))
 - Added `nix::ucontext` module on `aarch64-unknown-linux-gnu`.
@@ -26,6 +28,7 @@ This project adheres to [Semantic Versioning](https://semver.org/).
   ([#1868](https://github.com/nix-rust/nix/pull/1868))
 - Added `mq_timedreceive` to `::nix::mqueue`.
   ([#1966])(https://github.com/nix-rust/nix/pull/1966)
+- Added `LocalPeerPid` to `nix::sys::socket::sockopt` for macOS. ([#1967](https://github.com/nix-rust/nix/pull/1967))
 
 ### Changed
 
@@ -36,6 +39,10 @@ This project adheres to [Semantic Versioning](https://semver.org/).
 - With I/O-safe type applied in `pty::OpenptyResult` and `pty::ForkptyResult`,
   users no longer need to manually close the file descriptors in these types.
   ([#1921](https://github.com/nix-rust/nix/pull/1921))
+- `sys::event::{kevent, kevent_ts}` are deprecated in favor of
+  `sys::kevent::Kqueue::kevent`, and `sys::event::kqueue` is deprecated in
+  favor of `sys::kevent::Kqueue::new`.
+  ([#1943](https://github.com/nix-rust/nix/pull/1943))
 
 ### Fixed
 - Fix `SockaddrIn6` bug that was swapping flowinfo and scope_id byte ordering.
