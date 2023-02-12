@@ -103,7 +103,7 @@ fn unwrap_or_null<T>(option: Option<&T>) -> *const T {
 /// # }
 /// ```
 #[derive(Debug)]
-pub struct Futex<const PRIVATE: bool = false>(UnsafeCell<u32>);
+pub struct Futex<const PRIVATE: bool = false>(pub UnsafeCell<u32>);
 
 impl<const PRIVATE: bool> Futex<PRIVATE> {
     const MASK: i32 = if PRIVATE { libc::FUTEX_PRIVATE_FLAG } else { 0 };
