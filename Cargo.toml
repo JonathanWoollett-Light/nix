@@ -42,7 +42,7 @@ default = [
   "hostname", "inotify", "ioctl", "kmod", "mman", "mount", "mqueue",
   "net", "personality", "poll", "process", "pthread", "ptrace", "quota",
   "reboot", "resource", "sched", "signal", "socket", "term", "time",
-  "ucontext", "uio", "user", "zerocopy",
+  "ucontext", "uio", "user", "zerocopy", "futex"
 ]
 
 acct = []
@@ -77,6 +77,7 @@ ucontext = ["signal"]
 uio = []
 user = ["feature"]
 zerocopy = ["fs", "uio"]
+futex = []
 
 [dev-dependencies]
 assert-impl = "0.1"
