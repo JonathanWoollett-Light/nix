@@ -10,7 +10,7 @@ libc_bitflags! {
     }
 }
 
-#[deprecated(since = "0.27.0", note = "Use EventFd::value_and_flags() instead")]
+#[deprecated(since = "0.27.0", note = "Use EventFd::from_value_and_flags() instead")]
 pub fn eventfd(initval: libc::c_uint, flags: EfdFlags) -> Result<OwnedFd> {
     let res = unsafe { libc::eventfd(initval, flags.bits()) };
 
@@ -20,39 +20,50 @@ pub fn eventfd(initval: libc::c_uint, flags: EfdFlags) -> Result<OwnedFd> {
 #[derive(Debug)]
 pub struct EventFd(pub OwnedFd);
 impl EventFd {
-    /// [`EventFd::value_and_flags`] with `init_val = 0` and `flags = EfdFlags::empty()`.
+    /// [`EventFd::from_value_and_flags`] with `init_val = 0` and `flags = EfdFlags::empty()`.
     pub fn new() -> Result<Self> {
-        let res = unsafe { libc::eventfd(0, EfdFlags::empty().bits()) };
-        Errno::result(res).map(|r| Self(unsafe { OwnedFd::from_raw_fd(r) }))
+        Self::from_value_and_flags(0, EfdFlags::empty())
     }
     /// Constructs [`EventFd`] with the given `init_val` and `flags`.
     /// 
     /// Wrapper around [`libc::eventfd`].
-    pub fn value_and_flags(init_val: u32, flags: EfdFlags) -> Result<Self> {
+    pub fn from_value_and_flags(init_val: u32, flags: EfdFlags) -> Result<Self> {
         let res = unsafe { libc::eventfd(init_val, flags.bits()) };
         Errno::result(res).map(|r| Self(unsafe { OwnedFd::from_raw_fd(r) }))
     }
-    /// [`EventFd::value_and_flags`] with `init_val = 0` and given `flags`.
-    pub fn flags(flags: EfdFlags) -> Result<Self> {
-        let res = unsafe { libc::eventfd(0, flags.bits()) };
-        Errno::result(res).map(|r| Self(unsafe { OwnedFd::from_raw_fd(r) }))
+    /// [`EventFd::from_value_and_flags`] with `init_val = 0` and given `flags`.
+    pub fn from_flags(flags: EfdFlags) -> Result<Self> {
+        Self::from_value_and_flags(0, flags)
     }
-    /// [`EventFd::value_and_flags`] with given `init_val` and `flags = EfdFlags::empty()`.
-    pub fn value(init_val: u32) -> Result<Self> {
-        let res = unsafe { libc::eventfd(init_val, EfdFlags::empty().bits()) };
-        Errno::result(res).map(|r| Self(unsafe { OwnedFd::from_raw_fd(r) }))
+    /// [`EventFd::from_value_and_flags`] with given `init_val` and `flags = EfdFlags::empty()`.
+    pub fn from_value(init_val: u32) -> Result<Self> {
+        Self::from_value_and_flags(init_val, EfdFlags::empty())
     }
+    /// Arms `self`, a following call to `poll`, `select` or `epoll` will return immediately.
+    /// 
     /// [`EventFd::write`] with `1`.
     pub fn arm(&self) -> Result<usize> {
         unistd::write(self.0.as_raw_fd(),&1u64.to_ne_bytes())
     }
+    /// Defuses `self`, a following call to `poll`, `select` or `epoll` will block.
+    /// 
     /// [`EventFd::write`] with `0`.
     pub fn defuse(&self) -> Result<usize> {
         unistd::write(self.0.as_raw_fd(),&0u64.to_ne_bytes())
     }
-    /// Writes a given `value` to the file descriptor.
-    pub fn write(&self, value: u64) -> Result<usize> {
+    /// Enqueues `value` triggers.
+    /// 
+    /// The next `value` calls to `poll`, `select` or `epoll` will return immediately.
+    /// 
+    /// [`EventFd::write`] with `value`.
+    pub fn write(&self, value: u64) -> Result<usize> { 
         unistd::write(self.0.as_raw_fd(),&value.to_ne_bytes())
+    }
+    // Reads the value from the file descriptor.
+    pub fn read(&self) -> Result<u64> {
+        let mut arr = [0; std::mem::size_of::<u64>()];
+        unistd::read(self.0.as_raw_fd(),&mut arr)?;
+        Ok(u64::from_ne_bytes(arr))
     }
 }
 impl AsFd for EventFd {
