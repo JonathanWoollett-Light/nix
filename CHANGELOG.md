@@ -3,6 +3,24 @@
 All notable changes to this project will be documented in this file.
 This project adheres to [Semantic Versioning](https://semver.org/).
 
+## [0.27.0](https://github.com/JonathanWoollett-Light/nix/compare/v0.26.1...v0.27.0) (2022-12-31)
+
+
+### Features
+
+* I/O safety for 'kmod' ([2f546c9](https://github.com/JonathanWoollett-Light/nix/commit/2f546c98cb1abb4463f13b084443ae4bf1597cb3))
+* I/O safety for 'sys/inotify' ([9d74330](https://github.com/JonathanWoollett-Light/nix/commit/9d743300aedaa81b49c6d71a4bcfb6ef354d3f52))
+* I/O safety for 'sys/memfd' & 'sys/event' & 'sys/eventfd' ([27d1844](https://github.com/JonathanWoollett-Light/nix/commit/27d1844952386a52f190935f8fde1cc967f1e01f))
+* I/O safety for 'sys/poll' ([47ecc9a](https://github.com/JonathanWoollett-Light/nix/commit/47ecc9a1d0f26ef35f333d3f17304fa6e832d3f5))
+* I/O safety for 'sys/select' ([2be852d](https://github.com/JonathanWoollett-Light/nix/commit/2be852de8e5ccb4ec6933836d7d76fa6bde62763))
+* I/O safety for 'sys/sendfile' ([ab5c032](https://github.com/JonathanWoollett-Light/nix/commit/ab5c032e42b4296603263140276f5202b6ea538b))
+* I/O safety for 'sys/statfs' ([7058bce](https://github.com/JonathanWoollett-Light/nix/commit/7058bcef55ecdab7e7df463d450fda1beff3e92b))
+* I/O safety for 'sys/statvfs' ([a0e39af](https://github.com/JonathanWoollett-Light/nix/commit/a0e39af194726b0ff77c5f50242b8754a542f6d6))
+* I/O safety for 'sys/termios' & 'pty' ([8f52bc9](https://github.com/JonathanWoollett-Light/nix/commit/8f52bc97c96922f61140948eacabf966712d105e))
+* I/O safety for 'sys/timerfd' ([f592678](https://github.com/JonathanWoollett-Light/nix/commit/f592678301e30fa51b0149ca37f42b5c7ea5657e))
+* I/O safety for 'sys/uid' & 'sched' ([8772cde](https://github.com/JonathanWoollett-Light/nix/commit/8772cde9b84e0ab9103f9a8c97d6be7455d7873f))
+* I/O safety for 'sys/wait' ([c6e6d92](https://github.com/JonathanWoollett-Light/nix/commit/c6e6d9201bbad2d0fea141c412611c95025b61ae))
+
 ## [Unreleased] - ReleaseDate
 ### Added
 - Add `PF_ROUTE` to `SockType` on macOS, iOS, all of the BSDs, Fuchsia, Haiku, Illumos.
